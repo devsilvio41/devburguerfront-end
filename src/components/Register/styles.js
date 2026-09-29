@@ -1,117 +1,145 @@
-import styled from "styled-components";
-import BackgroundLogin from "../../assets/background-login.svg";
-import Background from "../../assets/background.svg";
-import { Link as ReactLink } from "react-router-dom";
+import {
+  Container,
+  LeftContainer,
+  RigthContainer,
+  Title,
+  Form,
+  InputContainer,
+  Link,
+} from "./styles";
+import { api } from "../../services/api";
+import Logo from "../../assets/logo.svg";
+import { Button } from "../../components/Button";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
-export const Container = styled.div`
-  display: flex;
-  height: 100vh;
-  width: 100vw;
-`;
+export function Register() {
+  const navigate = useNavigate();
+  // Validação
+  const schema = yup
+    .object({
+      name: yup.string().required("O nome é obrigatório"),
+      email: yup
+        .string()
+        .email("Enter a valid email address")
+        .required("The email is mandatory"),
+      password: yup
+        .string()
+        .min(6, "The password must be at least 6 characters long.")
+        .required("Enter the password"),
+      confirmPassword: yup
+        .string()
+        .oneOf([yup.ref("password")], "As senhas devem ser iguais")
+        .required("Confirme sua senha"),
+    })
+    .required();
+  // Fim Validação
 
-export const LeftContainer = styled.div`
-  background: url("${BackgroundLogin}");
-  background-size: cover;
-  background-position: center;
+  // Function
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
-  height: 100%;
-  width: 100%;
-  max-width: 50%;
+  const onSubmit = async (data) => {
+    try {
+      const { status } = await api.post(
+        "/users",
+        {
+          name: data.name,
+          email: data.email,
+          password: data.password,
+        },
+        { validateStatus: () => true },
+      );
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+      if (status === 200 || status === 201) {
+        toast.success("Conta criada com sucesso!");
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
+      } else if (status === 400) {
+        toast.error("Email já cadastrado! Faça login para continuar.");
+      } else {
+        toast.error("🫤Falha no sistema! Tente novamente.");
+      }
+    } catch {
+      toast.error("🫤Falha no sistema! Tente novamente.");
+    }
+  };
 
-  img {
-    width: 80%;
+  function handlePaste(e) {
+    e.preventDefault();
+    toast.warn("Não é possível colar neste campo.", {
+      toastId: "paste-blocked",
+    });
   }
-`;
+  // Fim Function
 
-export const RigthContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  return (
+    <Container>
+      <LeftContainer>
+        {/* 🔧 alt em texto normal */}
+        <img src={Logo} alt="Logo Dev Burguer" />
+      </LeftContainer>
+      <RigthContainer>
+        <Title>Criar conta</Title>
 
-  background: url("${Background}");
-  background-color: #1e1e1e;
-  p {
-    color: #fff;
-    font-size: 18px;
-    font-weight: 800;
-  }
-  a {
-    font-size: 18px;
-    cursor: pointer;
-  }
-
-  height: 100%;
-  width: 100%;
-  max-width: 50%;
-`;
-
-export const Title = styled.h2`
-  font-family: "Road Rage", sans-serif;
-  color: #fff;
-  font-size: 2.5rem;
-
-  a {
-    color: #9558a6;
-    font-family: "Road Rage", sans-serif;
-  }
-`;
-
-export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  padding: 20px;
-  width: 100%;
-  max-width: 400px;
-`;
-
-export const InputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  width: 100%;
-
-  input {
-    width: 100%;
-    border: none;
-    height: 52px;
-    border-radius: 5px;
-    padding: 0 1rem;
-  }
-
-  label {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #fff;
-  }
-
-  p {
-    color: yellow;
-    color: #fff;
-    font-size: 0.8rem;
-    font-family: "Poppins", sans-serif;
-    font-style: normal;
-    font-weight: 200;
-    height: 10px;
-  }
-`;
-
-export const Link = styled(ReactLink)`
-  display: inline-block;
-  font-size: 18px;
-  color: #fff;
-  text-decoration: none;
-  transition: transform 0.2s ease;
-
-  &:hover {
-    text-decoration: underline;
-    transform: translateX(15px) scale(1.2);
-    font-weight: 900;
-    color: yellow;
-  }
-`;
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <InputContainer>
+            {/* 🔧 htmlFor + id + autoComplete + role="alert" em todos os campos */}
+            <label htmlFor="name">Nome</label>
+            <input
+              id="name"
+              type="text"
+              autoComplete="name"
+              {...register("name")}
+            />
+            <p role="alert">{errors.name?.message}</p>
+          </InputContainer>
+          <InputContainer>
+            <label htmlFor="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              autoComplete="email"
+              {...register("email")}
+            />
+            <p role="alert">{errors.email?.message}</p>
+          </InputContainer>
+          <InputContainer>
+            <label htmlFor="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              autoComplete="new-password"
+              {...register("password")}
+            />
+            <p role="alert">{errors.password?.message}</p>
+          </InputContainer>
+          <InputContainer>
+            <label htmlFor="confirmPassword">Confirmar sua Senha</label>
+            <input
+              id="confirmPassword"
+              type="password"
+              autoComplete="new-password"
+              onPaste={handlePaste}
+              {...register("confirmPassword")}
+            />
+            <p role="alert">{errors.confirmPassword?.message}</p>
+          </InputContainer>
+          <Button type="submit">Criar conta</Button>
+          <p>
+            Já possui conta? <Link to="/login">Clique aqui!</Link>
+          </p>
+        </Form>
+      </RigthContainer>
+    </Container>
+  );
+}

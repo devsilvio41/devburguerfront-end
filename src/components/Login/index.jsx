@@ -66,35 +66,47 @@ export function Login() {
   // Fim Function
 
   return (
+    // 🔧 Removi o Fragment <>...</>: Container já é um único pai
     <Container>
-      <>
-        <LeftContainer>
-          <img src={Logo} alt="logo-dev-burguer" />
-        </LeftContainer>
-        <RigthContainer>
-          <Title>
-            Olá, seja bem vindo ao <span>Dev Burguer!</span> <br />
-            Acesse com seu <span> Login e senha</span>
-          </Title>
+      <LeftContainer>
+        {/* 🔧 alt em texto normal, sem hífens */}
+        <img src={Logo} alt="Logo Dev Burguer" />
+      </LeftContainer>
+      <RigthContainer>
+        <Title>
+          Olá, seja bem vindo ao <span>Dev Burguer!</span> <br />
+          Acesse com seu <span> Login e senha</span>
+        </Title>
 
-          <Form onSubmit={handleSubmit(onSubmit)}>
-            <InputContainer>
-              <label>Email</label>
-              <input {...register("email")} type="email" />
-              <p>{errors.email?.message}</p>
-            </InputContainer>
-            <InputContainer>
-              <label>Password</label>
-              <input {...register("password")} type="password" />
-              <p>{errors.password?.message}</p>
-            </InputContainer>
-            <Button type="submit">Entrar</Button>
-            <p>
-              Não possui conta? <Link to="/cadastro">Clique aqui!</Link>
-            </p>
-          </Form>
-        </RigthContainer>
-      </>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <InputContainer>
+            {/* 🔧 htmlFor + id */}
+            <label htmlFor="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              autoComplete="email" // 🔧 ajuda o navegador a preencher
+              {...register("email")}
+            />
+            {/* 🔧 role="alert": leitor de tela anuncia o erro */}
+            <p role="alert">{errors.email?.message}</p>
+          </InputContainer>
+          <InputContainer>
+            <label htmlFor="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              autoComplete="current-password"
+              {...register("password")}
+            />
+            <p role="alert">{errors.password?.message}</p>
+          </InputContainer>
+          <Button type="submit">Entrar</Button>
+          <p>
+            Não possui conta? <Link to="/cadastro">Clique aqui!</Link>
+          </p>
+        </Form>
+      </RigthContainer>
     </Container>
   );
 }

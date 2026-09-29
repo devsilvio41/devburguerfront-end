@@ -3,10 +3,16 @@ import BackgroundLogin from "../../assets/background-login.svg";
 import Background from "../../assets/background.svg";
 import { Link as ReactLink } from "react-router-dom";
 
-export const Container = styled.div`
+/* 🔧 div → main | 100vh → min-height | 100vw → 100% */
+export const Container = styled.main`
   display: flex;
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
+  width: 100%;
+
+  /* 🔧 Tablet e celular: empilha as colunas */
+  @media (max-width: 900px) {
+    flex-direction: column;
+  }
 `;
 
 export const LeftContainer = styled.div`
@@ -14,7 +20,7 @@ export const LeftContainer = styled.div`
   background-size: cover;
   background-position: center;
 
-  height: 100%;
+  /* 🔧 removi height: 100% (o flex já estica a coluna sozinho) */
   width: 100%;
   max-width: 50%;
 
@@ -25,9 +31,20 @@ export const LeftContainer = styled.div`
   img {
     width: 20rem;
   }
+
+  /* 🔧 Vira um "banner" no topo */
+  @media (max-width: 900px) {
+    max-width: 100%;
+    min-height: 200px;
+
+    img {
+      width: 12rem;
+    }
+  }
 `;
 
-export const RigthContainer = styled.div`
+/* 🔧 div → section (tem um título dentro, então faz sentido como seção) */
+export const RigthContainer = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,9 +54,10 @@ export const RigthContainer = styled.div`
   background-size: cover;
   background-color: #1e1e1e;
 
-  height: 100%;
+  /* 🔧 removi height: 100% */
   width: 100%;
   max-width: 50%;
+
   p {
     color: #fff;
     font-size: 18px;
@@ -48,9 +66,16 @@ export const RigthContainer = styled.div`
   a {
     font-size: 18px;
   }
+
+  @media (max-width: 900px) {
+    max-width: 100%;
+    flex: 1; /* ocupa o resto da altura da tela */
+    padding: 24px 0;
+  }
 `;
 
-export const Title = styled.h2`
+/* 🔧 h2 → h1 (título principal da página) */
+export const Title = styled.h1`
   font-family: "Road Rage", sans-serif;
   color: #fff;
   font-size: 2.5rem;
@@ -58,6 +83,12 @@ export const Title = styled.h2`
   span {
     color: #9558a6;
     font-family: "Road Rage", sans-serif;
+  }
+
+  @media (max-width: 900px) {
+    font-size: 1.8rem;
+    text-align: center;
+    padding: 0 20px;
   }
 `;
 
@@ -91,13 +122,12 @@ export const InputContainer = styled.div`
   }
 
   p {
-    color: yellow;
-    color: #fff;
+    color: #fff; /* 🔧 tirei o "color: yellow" duplicado (o segundo sempre vencia) */
     font-size: 0.8rem;
     font-family: "Poppins", sans-serif;
     font-style: normal;
     font-weight: 200;
-    height: 10px;
+    min-height: 1rem; /* 🔧 era height: 10px */
   }
 `;
 

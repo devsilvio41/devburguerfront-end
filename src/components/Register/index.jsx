@@ -85,35 +85,54 @@ export function Register() {
   return (
     <Container>
       <LeftContainer>
-        <img src={Logo} alt="logo-dev-burguer" />
+        {/* 🔧 alt em texto normal */}
+        <img src={Logo} alt="Logo Dev Burguer" />
       </LeftContainer>
       <RigthContainer>
         <Title>Criar conta</Title>
 
         <Form onSubmit={handleSubmit(onSubmit)}>
           <InputContainer>
-            <label>Nome</label>
-            <input {...register("name")} type="text" />
-            <p>{errors.name?.message}</p>
-          </InputContainer>
-          <InputContainer>
-            <label>Email</label>
-            <input {...register("email")} type="email" />
-            <p>{errors.email?.message}</p>
-          </InputContainer>
-          <InputContainer>
-            <label>Password</label>
-            <input {...register("password")} type="password" />
-            <p>{errors.password?.message}</p>
-          </InputContainer>
-          <InputContainer>
-            <label>Confirmar sua Senha</label>
+            {/* 🔧 htmlFor + id + autoComplete + role="alert" em todos os campos */}
+            <label htmlFor="name">Nome</label>
             <input
-              {...register("confirmPassword")}
-              type="password"
-              onPaste={handlePaste}
+              id="name"
+              type="text"
+              autoComplete="name"
+              {...register("name")}
             />
-            <p>{errors.confirmPassword?.message}</p>
+            <p role="alert">{errors.name?.message}</p>
+          </InputContainer>
+          <InputContainer>
+            <label htmlFor="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              autoComplete="email"
+              {...register("email")}
+            />
+            <p role="alert">{errors.email?.message}</p>
+          </InputContainer>
+          <InputContainer>
+            <label htmlFor="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              autoComplete="new-password"
+              {...register("password")}
+            />
+            <p role="alert">{errors.password?.message}</p>
+          </InputContainer>
+          <InputContainer>
+            <label htmlFor="confirmPassword">Confirmar sua Senha</label>
+            <input
+              id="confirmPassword"
+              type="password"
+              autoComplete="new-password"
+              onPaste={handlePaste}
+              {...register("confirmPassword")}
+            />
+            <p role="alert">{errors.confirmPassword?.message}</p>
           </InputContainer>
           <Button type="submit">Criar conta</Button>
           <p>
