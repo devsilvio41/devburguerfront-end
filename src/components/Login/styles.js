@@ -23,7 +23,7 @@ export const LeftContainer = styled.div`
   justify-content: center;
 
   img {
-    width: 80%;
+    width: 20rem;
   }
 `;
 
@@ -34,7 +34,12 @@ export const RigthContainer = styled.div`
   flex-direction: column;
 
   background: url("${Background}");
+  background-size: cover;
   background-color: #1e1e1e;
+
+  height: 100%;
+  width: 100%;
+  max-width: 50%;
   p {
     color: #fff;
     font-size: 18px;
@@ -43,10 +48,6 @@ export const RigthContainer = styled.div`
   a {
     font-size: 18px;
   }
-
-  height: 100%;
-  width: 100%;
-  max-width: 50%;
 `;
 
 export const Title = styled.h2`
