@@ -42,7 +42,9 @@ export function Login() {
   });
   console.log(errors);
   const onSubmit = async (data) => {
-    const response = await toast.promise(
+    const {
+      data: { token },
+    } = await toast.promise(
       api.post("/sessions", {
         email: data.email,
         password: data.password,
@@ -60,10 +62,10 @@ export function Login() {
         error: "Email ou Senha incorretos 🤯",
       },
     );
-
-    console.log(response);
+  localStorage.setItem("token", token);
   };
   // Fim Function
+
 
   return (
     // 🔧 Removi o Fragment <>...</>: Container já é um único pai
