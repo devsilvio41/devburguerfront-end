@@ -28,7 +28,7 @@ export const Container = styled.section`
   background:
     linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
     url("${Background}");
-  height: 500px;
+  height: 100%;
   background-position: center;
 `;
 

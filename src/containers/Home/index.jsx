@@ -12,7 +12,7 @@ export function Home() {
           <Content>
             <CategoriesCarousel />
             <OffersCarousel />
-            <div>Carrossel produtos</div>
+            <div style={{ textAlign: "center" }}>Carrossel produtos</div>
           </Content>
         </Container>
       </main>

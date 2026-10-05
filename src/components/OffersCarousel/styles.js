@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const CarouselContainer = styled.div`
+  background-image: url("${(props) => props.$imageUrl}");
   display: flex;
   overflow-x: auto;
   padding: 1rem;
@@ -9,9 +10,15 @@ export const CarouselContainer = styled.div`
 
 export const Container = styled.div`
   .carousel-item {
-    padding-right: 2rem;
+    padding-right: 2.2rem;
   }
-  padding-left: 30px;
+  overflow-x: hidden;
+
+  .react-multi-carousel-list {
+    overflow: visible;
+  }
+  padding-left: 40px;
+  padding-bottom: 40px;
 `;
 
 export const Title = styled.h2`
@@ -32,42 +39,4 @@ export const Title = styled.h2`
     bottom: 5px;
     left: calc(50% - 1.5rem);
   }
-`;
-
-export const ContainerItems = styled.div`
-  display: flex;
-  align-items: center; /* base do card */
-  justify-content: flex-start; /* esquerda (antes: center) */
-  padding: 1rem; /* distância das bordas */
-  padding: 0.5rem 1rem;
-  width: 90%;
-  height: 15.625rem;
-  border-radius: 1.25rem;
-  background-image: url("${(props) => props.$imageUrl}");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
-  &:hover {
-    transform: scale(1.05);
-    cursor: pointer;
-  }
-
-  p {
-    color: #fff;
-    margin-top: 5.625rem;
-    /* width: 9.375rem; */
-    max-width: 90%;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 0.0625rem 1.875rem;
-    border-radius: 1.8rem;
-    font-size: 1.25rem;
-    font-weight: bold;
-    /* margin-right: 1rem; */
-  }
-
-  color: #fff;
-  font-size: 1.5rem;
-  font-weight: bold;
 `;

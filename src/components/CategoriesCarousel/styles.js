@@ -51,7 +51,7 @@ export const ContainerItems = styled.div`
   transition: transform 0.3s ease-in-out;
   &:hover {
     transform: scale(1.05);
-    cursor: pointer;
+    cursor: grab;
   }
 
   p {
