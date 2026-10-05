@@ -32,4 +32,6 @@ export const Container = styled.section`
   background-position: center;
 `;
 
-export const Content = styled.div``;
+export const Content = styled.div`
+  padding-bottom: 4rem;
+`;

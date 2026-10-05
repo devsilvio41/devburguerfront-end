@@ -22,6 +22,7 @@ export const Title = styled.h2`
   position: relative;
   text-align: center;
   margin-bottom: 2.5rem;
+  text-transform: uppercase;
   &::after {
     content: "";
     position: absolute;

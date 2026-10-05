@@ -17,17 +17,18 @@ export const Container = styled.div`
 export const Title = styled.h2`
   font-size: 2rem;
   font-weight: 800;
-  color: #9758a6;
+  color: #61a120;
   padding-bottom: 0.8rem;
   position: relative;
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin: 3.7rem 0;
+  text-transform: uppercase;
   &::after {
     content: "";
     position: absolute;
     width: 3rem;
     height: 0.25rem;
-    background-color: #9758a6;
+    background-color: #61a120;
     bottom: 5px;
     left: calc(50% - 1.5rem);
   }
@@ -56,12 +57,12 @@ export const ContainerItems = styled.div`
   p {
     color: #fff;
     margin-top: 5.625rem;
-    width: 9.375rem;
-    max-width: 80%;
+    /* width: 9.375rem; */
+    max-width: 90%;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 0.0625rem 1.875rem;
     border-radius: 1.8rem;
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     font-weight: bold;
     /* margin-right: 1rem; */
   }
