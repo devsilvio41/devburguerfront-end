@@ -4,6 +4,7 @@ import CarouselModule from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Container, Title } from "./styles";
 import { CardProduct } from "../CardProduct";
+import { formatPrice } from "../../utils/formatPrice";
 
 // Se vier embrulhado, pega o .default; se não, usa direto
 const Carousel = CarouselModule.default ?? CarouselModule;
@@ -14,9 +15,9 @@ export function OffersCarousel() {
   useEffect(() => {
     async function loadProducts() {
       const { data } = await api.get("/products");
-      const onlyOffers = data.products.filter(
-        (product) => product.offer === true,
-      );
+      const onlyOffers = data.products
+        .filter((product) => product.offer === true)
+        .map((product) => ({ currrencyValue: formatPrice(product.price), ...product}));
 
       setOffers(onlyOffers);
     }

@@ -1,4 +1,4 @@
-import { Banner, Container, Content } from "./styles";
+import { Banner, Container } from "./styles";
 import { CategoriesCarousel } from "../../components/CategoriesCarousel";
 import { OffersCarousel } from "../../components/OffersCarousel";
 export function Home() {
@@ -9,11 +9,11 @@ export function Home() {
           <h1>Bem-vindo(a)!</h1>
         </Banner>
         <Container>
-          <Content>
+          <div>
             <CategoriesCarousel />
             <OffersCarousel />
             <div style={{ textAlign: "center" }}>Carrossel produtos</div>
-          </Content>
+          </div>
         </Container>
       </main>
     </>

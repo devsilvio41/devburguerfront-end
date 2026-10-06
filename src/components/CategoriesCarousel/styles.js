@@ -11,6 +11,14 @@ export const Container = styled.div`
   .carousel-item {
     padding-right: 2rem;
   }
+  .react-multiple-carousel__arrow--left {
+    left: 15px;
+    top: 10px;
+  }
+
+  .react-multiple-carousel__arrow--right {
+    top: 10px;
+  }
   padding-left: 30px;
 `;
 
@@ -40,7 +48,7 @@ export const ContainerItems = styled.div`
   justify-content: flex-start; /* esquerda (antes: center) */
   padding: 1rem; /* distância das bordas */
   padding: 0.5rem 1rem;
-  width: 90%;
+  width: 100%;
   height: 15.625rem;
   border-radius: 1.25rem;
   background-image: url("${(props) => props.$imageUrl}");
