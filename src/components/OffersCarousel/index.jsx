@@ -17,7 +17,10 @@ export function OffersCarousel() {
       const { data } = await api.get("/products");
       const onlyOffers = data.products
         .filter((product) => product.offer === true)
-        .map((product) => ({ currrencyValue: formatPrice(product.price), ...product}));
+        .map((product) => ({
+          currrencyValue: formatPrice(product.price),
+          ...product,
+        }));
 
       setOffers(onlyOffers);
     }
