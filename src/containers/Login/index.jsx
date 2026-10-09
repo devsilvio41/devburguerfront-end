@@ -62,10 +62,9 @@ export function Login() {
         error: "Email ou Senha incorretos 🤯",
       },
     );
-  localStorage.setItem("token", token);
+    localStorage.setItem("token", token);
   };
   // Fim Function
-
 
   return (
     // 🔧 Removi o Fragment <>...</>: Container já é um único pai

@@ -1,10 +1,18 @@
 import BannerHamburger from "../../assets/banner-hamburger.svg";
 import styled from "styled-components";
+import Background from "../../assets/background.svg";
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
   width: 100%;
   min-height: 100vh;
   background-color: #f0f0f0;
+
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
+    url("${Background}");
+  height: 100%;
+  background-position: center;
 `;
 
 export const Banner = styled.div`
@@ -45,6 +53,39 @@ export const Banner = styled.div`
   }
 `;
 
-export const CategoryMenu = styled.div``;
+export const CategoryMenu = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 1.9rem;
 
-export const ProductsContainer = styled.div``;
+  a {
+    text-decoration: none;
+    color: #9758a6;
+    font-weight: 600;
+    padding-bottom: 3px;
+    line-height: 20px;
+    border-bottom: 5px solid #f8c053;
+
+    transition:
+      transform 0.3s ease,
+      color 0.3s ease;
+
+    &:hover {
+      transform: translateY(-3px) scale(1.1);
+      color: #9758a6;
+    }
+  }
+`;
+
+export const CategoryButton = styled(Link)``;
+
+export const ProductsContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 2.2rem;
+  justify-content: center;
+  gap: 5rem;
+  margin: 3rem auto 0;
+  max-width: 1280px;
+`;
