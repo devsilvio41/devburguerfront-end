@@ -59,13 +59,13 @@ export const CategoryMenu = styled.div`
   gap: 50px;
   margin-top: 1.9rem;
 
-  a {
+  /* a {
     text-decoration: none;
     color: #9758a6;
     font-weight: 600;
-    padding-bottom: 3px;
+    padding-bottom: 2px;
     line-height: 20px;
-    border-bottom: 5px solid #f8c053;
+    border-bottom: 2px solid #9758a9;
 
     transition:
       transform 0.3s ease,
@@ -74,11 +74,46 @@ export const CategoryMenu = styled.div`
     &:hover {
       transform: translateY(-3px) scale(1.1);
       color: #9758a6;
-    }
+    } */
   }
 `;
 
-export const CategoryButton = styled(Link)``;
+// export const CategoryButton = styled.button`
+//   cursor: pointer;
+//   background: none;
+//   color: #9758a6;
+//   font-size: 1.5rem;
+//   font-weight: 600;
+//   padding-bottom: 5px;
+//   line-height: 20px;
+//   text-decoration: none;
+//   border: none;
+
+//   border-bottom: ${(props) =>
+//     props.$isActiveCategory ? "5px solid #9758a6" : "3px solid transparent"};
+// `;
+
+export const CategoryButton = styled(Link)`
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: ${(props) => (props.$isActiveCategory ? "#9758a6" : "#696969")};
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding-bottom: 5px;
+  line-height: 20px;
+  border-bottom: ${(props) =>
+    props.$isActiveCategory ? "3px solid #9758a6" : "3px solid transparent"};
+
+       transition:
+      transform 0.3s ease,
+      color 0.3s ease;
+
+    &:hover {
+      transform: translateY(-3px) scale(1.1);
+      color: #9758a6;
+`;
 
 export const ProductsContainer = styled.div`
   display: grid;
