@@ -58,24 +58,6 @@ export const CategoryMenu = styled.div`
   justify-content: center;
   gap: 50px;
   margin-top: 1.9rem;
-
-  /* a {
-    text-decoration: none;
-    color: #9758a6;
-    font-weight: 600;
-    padding-bottom: 2px;
-    line-height: 20px;
-    border-bottom: 2px solid #9758a9;
-
-    transition:
-      transform 0.3s ease,
-      color 0.3s ease;
-
-    &:hover {
-      transform: translateY(-3px) scale(1.1);
-      color: #9758a6;
-    } */
-  }
 `;
 
 // export const CategoryButton = styled.button`
@@ -106,13 +88,14 @@ export const CategoryButton = styled(Link)`
   border-bottom: ${(props) =>
     props.$isActiveCategory ? "3px solid #9758a6" : "3px solid transparent"};
 
-       transition:
-      transform 0.3s ease,
-      color 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
 
-    &:hover {
-      transform: translateY(-3px) scale(1.1);
-      color: #9758a6;
+  &:hover {
+    transform: translateY(-3px) scale(1.1);
+    color: #9758a6;
+  }
 `;
 
 export const ProductsContainer = styled.div`

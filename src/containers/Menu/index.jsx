@@ -24,7 +24,7 @@ export function Menu() {
   useEffect(() => {
     async function loadCategories() {
       const { data } = await api.get("/categories");
-      const newCategories = [{ id: 0, name: "Todas" }, ...data];
+      // const newCategories = [{ id: 0, name: "Todas" }, ...data];
       setCategories([{ id: 0, name: "Todas" }, ...data]);
 
       // setCategories(newCategories);
