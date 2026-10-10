@@ -29,7 +29,7 @@ export const LeftContainer = styled.div`
   justify-content: center;
 
   img {
-    width: 20rem;
+    width: 25rem;
   }
 
   /* 🔧 Vira um "banner" no topo */

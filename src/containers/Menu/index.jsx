@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { api } from "../../services/api";
 import {
   Container,
@@ -7,19 +7,29 @@ import {
   ProductsContainer,
   CategoryButton,
 } from "./styles";
-import { useEffect } from "react";
 import { formatPrice } from "../../utils/formatPrice";
 import { CardProduct } from "../../components/CardProduct";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { BackButton } from "../../components/BackButton";
 
 export function Menu() {
   // Inicio UseEffec e useState
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   // const [filteredProducts, setFilteredProducts] = useState([]);
-  const [activeCategory, setActiveCategory] = useState(0);
 
   const navigate = useNavigate();
+  const { search } = useLocation();
+
+  const queryParams = new URLSearchParams(search);
+
+  const [activeCategory, setActiveCategory] = useState(() => {
+    const categoryId = +queryParams.get("categoria");
+    if (categoryId) {
+      return categoryId;
+    }
+    return 0;
+  });
 
   useEffect(() => {
     async function loadCategories() {
@@ -114,6 +124,7 @@ export function Menu() {
             <CardProduct product={product} key={product.id} />
           ))}
         </ProductsContainer>
+        <BackButton />
       </Container>
     </>
   );
