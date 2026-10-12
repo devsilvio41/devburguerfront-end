@@ -3,11 +3,29 @@ import { Login } from "../containers/Login";
 import { Register } from "../containers/Register";
 import { Home } from "../containers/Home";
 import { Menu } from "../containers/Menu";
+// import { Layout } from "../Layout";
+import { Header } from "../components/Header";
 
 export const router = createBrowserRouter([
+  // {
+  //   path: "/",
+  //   element: <Layout />,
+  //   children: [
+  //     { index: true, element: <Home /> },
+  //     { path: "login", element: <Login /> },
+  //     { path: "cadastro", element: <Register /> },
+  //     { path: "cardapio", element: <Menu /> },
+  //   ],
+  // },
+
   {
     path: "/",
-    element: <Home />,
+    element: (
+      <>
+        <Header />,
+        <Home />,
+      </>
+    ),
   },
   {
     path: "/login",
