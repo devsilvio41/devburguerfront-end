@@ -1,19 +1,42 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
-const UserContext = createContext({});
+const UserContext = createContext(null);
 
 export const UserProvider = ({ children }) => {
-  const [userInfo, setUserInfo] = useState({ id: 1, name: "Sílvio" });
+  const [userInfo, setUserInfo] = useState({});
+
+  const putUserData = (userInfo) => {
+    setUserInfo(userInfo);
+
+    localStorage.setItem("devburguer:userData", JSON.stringify(userInfo));
+  };
+
+  const logout = () => {
+    setUserInfo({});
+    localStorage.removeItem("devburguer:userData");
+  };
+
+  // Recupera os dados salvos quando a página é recarregada
+  useEffect(() => {
+    const userInfoLocalStorage = localStorage.getItem("devburguer:userData");
+
+    if (userInfoLocalStorage) {
+      setUserInfo(JSON.parse(userInfoLocalStorage));
+    }
+  }, []);
 
   return (
-    <UserContext.Provider value={{ userInfo }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ userInfo, putUserData, logout }}>
+      {children}
+    </UserContext.Provider>
   );
 };
 
 export const useUser = () => {
   const context = useContext(UserContext);
+
   if (!context) {
-    throw new Error("useUser must be a valid context");
+    throw new Error("useUser must be used within a UserProvider");
   }
 
   return context;
