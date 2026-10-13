@@ -3,6 +3,8 @@ import { Container, CardImage } from "./styles";
 import { CartButton } from "../CartButton";
 import { formatPrice } from "../../utils/formatPrice";
 export function CardProduct({ product }) {
+  console.log(product);
+
   return (
     <Container>
       <CardImage src={product.url} alt={product.name} />

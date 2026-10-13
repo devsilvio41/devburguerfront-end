@@ -29,7 +29,7 @@ export const LeftContainer = styled.div`
   justify-content: center;
 
   img {
-    width: 25rem;
+    width: 80%;
   }
 
   /* 🔧 Vira um "banner" no topo */
@@ -38,7 +38,7 @@ export const LeftContainer = styled.div`
     min-height: 200px;
 
     img {
-      width: 15rem; /* 🔧 80% seria enorme num banner */
+      width: 12rem; /* 🔧 80% seria enorme num banner */
     }
   }
 `;
