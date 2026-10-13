@@ -11,6 +11,8 @@ export const Container = styled.div`
   background-color: #fff;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   cursor: grab;
+  box-shadow: 0px 8px 17px 4px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0px 8px 17px 4px rgba(0, 0, 0, 0.5);
 
   div {
     display: flex;
