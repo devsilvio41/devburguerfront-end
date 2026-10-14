@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const CarouselContainer = styled.div`
@@ -43,6 +44,7 @@ export const Title = styled.h2`
 `;
 
 export const ContainerItems = styled.div`
+  position: relative; /* NOVO: referência para o botão absoluto */
   display: flex;
   align-items: center; /* base do card */
   justify-content: flex-start; /* esquerda (antes: center) */
@@ -62,20 +64,28 @@ export const ContainerItems = styled.div`
     cursor: grab;
   }
 
-  p {
-    color: #fff;
-    margin-top: 5.625rem;
-    width: 9.375rem;
-    max-width: 80%;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 0.0625rem 1.875rem;
-    border-radius: 1.8rem;
-    font-size: 1.1rem;
-    font-weight: bold;
-    /* margin-right: 1rem; */
-  }
-
   color: #fff;
   font-size: 1.5rem;
   font-weight: bold;
+`;
+
+export const CategoryButton = styled(Link)`
+  position: absolute;
+  bottom: 4rem;
+  left: 1rem;
+
+  padding: 0.25rem 1.875rem;
+  white-space: nowrap;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 1.8rem;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+
+  &:hover {
+    background-color: #9758a6;
+    font-weight: 600;
+  }
 `;
