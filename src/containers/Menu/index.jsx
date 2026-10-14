@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 export function Menu() {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [activeCategory, setActiveCategory] = useState(0);
 
   const navigate = useNavigate();
@@ -40,6 +41,18 @@ export function Menu() {
     loadCategories();
     loadProducts();
   }, []);
+
+  useEffect(() => {
+    if (activeCategory === 0) {
+      setFilteredProducts(products);
+    } else {
+      const categoryProducts = products.filter(
+        (product) => product.category_id === activeCategory,
+      );
+
+      setFilteredProducts(categoryProducts);
+    }
+  }, [products, activeCategory]);
 
   return (
     <>
@@ -72,7 +85,7 @@ export function Menu() {
           ))}
         </CategoryMenu>
         <ProductsContainer>
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <CardProduct product={product} key={product.id} />
           ))}
         </ProductsContainer>
