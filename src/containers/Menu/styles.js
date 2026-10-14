@@ -63,8 +63,8 @@ export const CategoryMenu = styled.div`
 export const CategoryButton = styled(Link)`
   text-decoration: none;
   font-size: 1.5rem;
-  font-weight: 600;
-  color: #9758a6;
+  ${(props) => (props.$isActiveCategory ? "font-weight: 600;" : "font-weight: 500;")}
+  color: ${(props) => (props.$isActiveCategory ? "#9758a6" : "#353538")};
   border: none;
   border-bottom: ${(props) => props.$isActiveCategory && "3px solid #9758a6"};
 `;
