@@ -9,10 +9,14 @@ import { useEffect, useState } from "react";
 import { api } from "../../services/api";
 import { formatPrice } from "../../utils/formatPrice";
 import { CardProduct } from "../../components/CardProduct";
+import { useNavigate } from "react-router-dom";
 
 export function Menu() {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
+  const [activeCategory, setActiveCategory] = useState(0);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function loadCategories() {
@@ -48,7 +52,23 @@ export function Menu() {
         </Banner>
         <CategoryMenu>
           {categories.map((category) => (
-            <CategoryButton key={category.id}>{category.name}</CategoryButton>
+            <CategoryButton
+              key={category.id}
+              onClick={() => {
+                navigate(
+                  {
+                    pathname: "/cardapio",
+                    search: `?categoria=${category.id}`,
+                  },
+                  {
+                    replace: true,
+                  },
+                );
+                setActiveCategory(category.id);
+              }}
+            >
+              {category.name}
+            </CategoryButton>
           ))}
         </CategoryMenu>
         <ProductsContainer>

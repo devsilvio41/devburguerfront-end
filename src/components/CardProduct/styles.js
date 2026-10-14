@@ -6,7 +6,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 50px;
+  gap: 3rem;
   padding: 20px;
   border-radius: 8px;
   background-color: #fff;
@@ -19,7 +19,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 10px;
+    gap: 1rem;
   }
 
   p {
