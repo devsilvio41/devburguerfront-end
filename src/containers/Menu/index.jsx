@@ -46,11 +46,11 @@ export function Menu() {
     if (activeCategory === 0) {
       setFilteredProducts(products);
     } else {
-      const categoryProducts = products.filter(
+      const newFilteredProducts = products.filter(
         (product) => product.category_id === activeCategory,
       );
 
-      setFilteredProducts(categoryProducts);
+      setFilteredProducts(newFilteredProducts);
     }
   }, [products, activeCategory]);
 
