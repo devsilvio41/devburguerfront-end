@@ -65,6 +65,8 @@ export const CategoryButton = styled(Link)`
   font-size: 1.5rem;
   font-weight: 600;
   color: #9758a6;
+  border: none;
+  border-bottom: ${(props) => props.$isActiveCategory && "3px solid #9758a6"};
 `;
 
 export const ProductsContainer = styled.div`
