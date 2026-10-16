@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StyledButton = styled.button`
   position: fixed;
   left: 24px; /* troque por right: 24px para ficar na direita */
-  bottom: 24px; /* ou top: 24px para ficar no topo */
+  bottom: 30%; /* ou top: 24px para ficar no topo */
   z-index: 100;
 
   background: #9758a6;

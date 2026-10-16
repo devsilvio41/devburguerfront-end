@@ -10,11 +10,12 @@ import { api } from "../../services/api";
 import { formatPrice } from "../../utils/formatPrice";
 import { CardProduct } from "../../components/CardProduct";
 import { useLocation, useNavigate } from "react-router-dom";
+import { BackButton } from "../../components/BackButton";
 
 export function Menu() {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
+  // const [filteredProducts, setFilteredProducts] = useState([]);
 
   const navigate = useNavigate();
 
@@ -54,17 +55,22 @@ export function Menu() {
     loadProducts();
   }, []);
 
-  useEffect(() => {
-    if (activeCategory === 0) {
-      setFilteredProducts(products);
-    } else {
-      const newFilteredProducts = products.filter(
-        (product) => product.category_id === activeCategory,
-      );
+  // useEffect(() => {
+  //   if (activeCategory === 0) {
+  //     setFilteredProducts(products);
+  //   } else {
+  //     const newFilteredProducts = products.filter(
+  //       (product) => product.category_id === activeCategory,
+  //     );
 
-      setFilteredProducts(newFilteredProducts);
-    }
-  }, [products, activeCategory]);
+  //     setFilteredProducts(newFilteredProducts);
+  //   }
+  // }, [products, activeCategory]);
+  // ✅ Depois: valor calculado durante a renderização
+  const filteredProducts =
+    activeCategory === 0
+      ? products
+      : products.filter((product) => product.category_id === activeCategory);
 
   return (
     <>
@@ -102,6 +108,7 @@ export function Menu() {
             <CardProduct product={product} key={product.id} />
           ))}
         </ProductsContainer>
+        <BackButton />
       </Container>
     </>
   );

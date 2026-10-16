@@ -1,6 +1,7 @@
 import { Banner, Container } from "./styles";
 import { CategoriesCarousel } from "../../components/CategoriesCarousel";
 import { OffersCarousel } from "../../components/OffersCarousel";
+import { BackButton } from "../../components/BackButton";
 export function Home() {
   return (
     <>
@@ -15,6 +16,7 @@ export function Home() {
             <div style={{ textAlign: "center" }}>Rodapé</div>
           </div>
         </Container>
+        <BackButton />
       </main>
     </>
   );
