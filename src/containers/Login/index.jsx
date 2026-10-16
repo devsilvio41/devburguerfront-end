@@ -40,7 +40,6 @@ export function Login() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  console.log(errors);
   const onSubmit = async (data) => {
     const {
       data: { token },
