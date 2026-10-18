@@ -3,7 +3,7 @@ import { createContext, useContext, useState, useEffect } from "react";
 const UserContext = createContext(null);
 
 export const UserProvider = ({ children }) => {
-  const [userInfo, setUserInfo] = useState({});
+  const [userInfo, setUserInfo] = useState({ id: 1, name: "Sílvio" });
 
   const putUserData = (userInfo) => {
     setUserInfo(userInfo);
