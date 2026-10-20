@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export const Container = styled.div`
   background-color: #1f1f1f;
   width: 100%;
-  height: 72px;
+  height: 4.5rem;
   padding: 0 56px;
 `;
 
@@ -30,12 +30,20 @@ export const Navigation = styled.nav`
     justify-content: center;
     align-items: center;
     gap: 20px;
+
+    hr {
+      height: 24px;
+      border: 1px solid #625e5e;
+    }
   }
 `;
 
 export const HeaderLink = styled(Link)`
-  color: #fff;
+  color: ${(props) => (props.$isActive ? "#b351ae" : "#fff")};
+  font-weight: ${(props) => (props.$isActive ? "700" : "400")};
+  border-bottom: ${(props) => (props.$isActive ? "1px solid #9758a6" : "none")};
   text-decoration: none;
+  padding-bottom: 2px;
   font-size: 1.1rem;
 
   &:hover {
@@ -71,11 +79,13 @@ export const Profile = styled.div`
 export const LinkContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
 `;
 
 export const Logout = styled.button`
   color: #ff3205;
   text-decoration: none;
   font-weight: 700;
+  background-color: transparent;
+  border: none;
 `;
