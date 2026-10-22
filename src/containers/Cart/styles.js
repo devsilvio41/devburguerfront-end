@@ -11,7 +11,7 @@ export const Container = styled.div`
 `;
 export const Banner = styled.div`
   background: url("${Texture}");
-  background-color: 1f1f1f;
+  background-color: #1f1f1f;
   background-size: cover;
   display: flex;
   align-items: center;
