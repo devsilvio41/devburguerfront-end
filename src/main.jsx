@@ -4,7 +4,7 @@ import GlobalStyles from "./styles/globalStyles";
 import { ToastContainer } from "react-toastify";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routes";
-import AppProvider from "./containers/hooks";
+import AppProvider from "./hooks";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

@@ -9,8 +9,8 @@ import {
   LinkContainer,
 } from "./styles";
 import { UserCircleIcon, ShoppingCartSimpleIcon } from "@phosphor-icons/react";
-import { useUser } from "../../containers/hooks/UserContext";
 import { useNavigate, useResolvedPath } from "react-router-dom";
+import { useUser } from "../../hooks/UserContext";
 
 export function Header() {
   const navigate = useNavigate();
