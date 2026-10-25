@@ -1,7 +1,9 @@
 import { Banner, Container } from "./styles";
-import { CategoriesCarousel } from "../../components/CategoriesCarousel";
-import { OffersCarousel } from "../../components/OffersCarousel";
-import { BackButton } from "../../components/BackButton";
+import {
+  CategoriesCarousel,
+  OffersCarousel,
+  BackButton,
+} from "../../components";
 export function Home() {
   return (
     <>
