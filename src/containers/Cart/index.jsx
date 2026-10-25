@@ -10,7 +10,8 @@ export function Cart() {
       <Title>Checkout - Pedido</Title>
       <Content>
         <CartItems />
-      {/*<CartResume /> */}</Content>
+        {/*<CartResume /> */}
+      </Content>
     </Container>
   );
 }
