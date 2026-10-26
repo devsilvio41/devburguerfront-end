@@ -8,3 +8,5 @@ export * from "./Header";
 export * from "./OffersCarousel";
 export * from "./BackButton";
 export * from "./Table";
+export * from "./CartResume";
+export * from "./CartItems";
