@@ -6,10 +6,13 @@ import {
   ButtonGroup,
   EmptyCart,
   ProductTotalPrice,
+  TrashImage,
 } from "./styles.js";
+import TrashIcon from "../../assets/trash.svg";
 
 export function CartItems() {
-  const { cartProducts, increaseProduct, decreaseProduct } = useCart();
+  const { cartProducts, increaseProduct, decreaseProduct, deleteProduct } =
+    useCart();
   return (
     <Table.Root>
       <Table.Header>
@@ -19,6 +22,7 @@ export function CartItems() {
           <Table.Th>Preço</Table.Th>
           <Table.Th>Quantidade</Table.Th>
           <Table.Th>Total</Table.Th>
+          <Table.Th></Table.Th>
         </Table.Tr>
       </Table.Header>
       <Table.Body>
@@ -41,6 +45,14 @@ export function CartItems() {
                 <ProductTotalPrice>
                   {formatPrice(product.quantity * product.price)}
                 </ProductTotalPrice>
+              </Table.Td>
+              <Table.Td>
+                <TrashImage
+                  src={TrashIcon}
+                  alt="Lixeira"
+                  title="Excluir item"
+                  onClick={() => deleteProduct(product.id)}
+                />
               </Table.Td>
             </Table.Tr>
           ))
