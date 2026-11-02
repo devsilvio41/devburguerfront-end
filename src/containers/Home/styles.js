@@ -4,15 +4,17 @@ import Background from "../../assets/background.svg";
 
 export const Banner = styled.div`
   background: url("${BannerHome}");
+  background-repeat: no-repeat;
+  background-color: #000;
   background-size: cover;
   background-position: center;
   height: 30rem;
-  max-height: 480px;
-  width: 100%;
+  max-height: 400px;
+  /* width: 50%; */
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: black;
   font-size: 2rem;
 
   h1 {

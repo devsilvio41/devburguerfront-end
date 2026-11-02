@@ -8,7 +8,8 @@ import {
   Link,
 } from "./styles";
 import { api } from "../../services/api";
-import Logo from "../../assets/logo.svg";
+// import Logo from "../../assets/logo.svg";
+import GordaoPampam from "../../assets/gordao.png";
 import { Button } from "../../components/Button";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -71,11 +72,13 @@ export function Login() {
     <Container>
       <LeftContainer>
         {/* 🔧 alt em texto normal, sem hífens */}
-        <img src={Logo} alt="Logo Dev Burguer" />
+        <img src={GordaoPampam} alt="Gordão Pampam" />
       </LeftContainer>
       <RigthContainer>
         <Title>
-          Olá, seja bem vindo ao <span>Dev Burguer!</span> <br />
+          Olá, seja bem vindo ao Restaurante do
+          <br /> Gordão & <span>Lanches da Pampam</span>
+          <br />
           Acesse com seu <span> Login e senha</span>
         </Title>
 

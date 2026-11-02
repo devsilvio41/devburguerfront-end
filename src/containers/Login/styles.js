@@ -29,7 +29,7 @@ export const LeftContainer = styled.div`
   justify-content: center;
 
   img {
-    width: 20rem;
+    width: 30rem;
   }
 
   /* 🔧 Vira um "banner" no topo */
@@ -78,7 +78,8 @@ export const RigthContainer = styled.section`
 export const Title = styled.h1`
   font-family: "Road Rage", sans-serif;
   color: #fff;
-  font-size: 2.5rem;
+  font-size: 2rem;
+  text-align: center;
 
   span {
     color: #9558a6;

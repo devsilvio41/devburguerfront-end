@@ -8,7 +8,7 @@ import {
   Link,
 } from "./styles";
 import { api } from "../../services/api";
-import Logo from "../../assets/logo.svg";
+import GordaoPampam from "../../assets/gordao.png";
 import { Button } from "../../components/Button";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -86,7 +86,7 @@ export function Register() {
     <Container>
       <LeftContainer>
         {/* 🔧 alt em texto normal */}
-        <img src={Logo} alt="Logo Dev Burguer" />
+        <img src={GordaoPampam} alt="Gordão Pampam" />
       </LeftContainer>
       <RigthContainer>
         <Title>Criar conta</Title>

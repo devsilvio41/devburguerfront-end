@@ -1,6 +1,6 @@
 import { Button } from "../Button";
 import { Container } from "./styles";
-import { toast } from "react-toastify";
+import { toast, Bounce } from "react-toastify";
 import { useEffect, useState } from "react";
 
 import { useCart } from "../../hooks/CartContext";
@@ -24,33 +24,56 @@ export function CartResume() {
 
   const submitOrder = async () => {
     const products = cartProducts.map((product) => {
-      return { id: product.id, quantity: product.quantity };
+      return {
+        id: product.id,
+        quantity: product.quantity,
+        price: product.price,
+      };
     });
 
     try {
-      const { status } = await api.post(
-        "/orders",
-        { products },
-        {
-          validateStatus: () => true,
-        },
-      );
+      const { data } = await api.post("create-payment-intent", { products });
 
-      if (status === 200 || status === 201) {
-        toast.success("Pedido realizado com sucesso!");
-        setTimeout(() => {
-          navigate("/");
-        }, 2000);
-
-        clearCart();
-      } else if (status === 400) {
-        toast.error("Falha ao realizar seu pedido.");
-      } else {
-        toast.error("🫤Falha no sistema! Tente novamente.");
-      }
-    } catch {
-      toast.error("🫤Falha no sistema! Tente novamente.");
+      navigate("/checkout", { state: data });
+    } catch (error) {
+      toast.error("Erro, tente novamente!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+      });
+      console.error("Erro ao criar o pagamento:", error);
     }
+
+    // try {
+    //   const { status } = await api.post(
+    //     "/orders",
+    //     { products },
+    //     {
+    //       validateStatus: () => true,
+    //     },
+    //   );
+
+    //   if (status === 200 || status === 201) {
+    //     toast.success("Pedido realizado com sucesso!");
+    //     setTimeout(() => {
+    //       navigate("/");
+    //     }, 2000);
+
+    //     clearCart();
+    //   } else if (status === 400) {
+    //     toast.error("Falha ao realizar seu pedido.");
+    //   } else {
+    //     toast.error("🫤Falha no sistema! Tente novamente.");
+    //   }
+    // } catch {
+    //   toast.error("🫤Falha no sistema! Tente novamente.");
+    // }
   };
 
   // Sugestão de melhoria sem useEffect e useState
