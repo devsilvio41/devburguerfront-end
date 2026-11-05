@@ -1,12 +1,19 @@
-import { useLocation } from "react-router-dom";
+import { Elements } from "@stripe/react-stripe-js";
+import { Navigate, useLocation } from "react-router-dom";
+import stripePromise from "../../config/stripeConfig";
+import { CheckoutForm } from "../../components/Stripe/CheckoutForm";
+
 export function Checkout() {
-  const location = useLocation();
-  console.log(location);
+  const { state } = useLocation();
+  const clientSecret = state?.clientSecret;
+
+  if (!clientSecret) {
+    return <Navigate to="/carrinho" replace />; // confirme se essa é a rota do seu carrinho
+  }
 
   return (
-    <div>
-      <h1>Checkout</h1>
-      {/* Add your checkout form and components here */}
-    </div>
+    <Elements stripe={stripePromise} options={{ clientSecret }}>
+      <CheckoutForm />
+    </Elements>
   );
 }

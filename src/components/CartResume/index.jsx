@@ -33,7 +33,7 @@ export function CartResume() {
 
     try {
       const { data } = await api.post("create-payment-intent", { products });
-
+      console.log("resposta do back:", data);
       navigate("/checkout", { state: data });
     } catch (error) {
       toast.error("Erro, tente novamente!", {
@@ -50,30 +50,6 @@ export function CartResume() {
       console.error("Erro ao criar o pagamento:", error);
     }
 
-    // try {
-    //   const { status } = await api.post(
-    //     "/orders",
-    //     { products },
-    //     {
-    //       validateStatus: () => true,
-    //     },
-    //   );
-
-    //   if (status === 200 || status === 201) {
-    //     toast.success("Pedido realizado com sucesso!");
-    //     setTimeout(() => {
-    //       navigate("/");
-    //     }, 2000);
-
-    //     clearCart();
-    //   } else if (status === 400) {
-    //     toast.error("Falha ao realizar seu pedido.");
-    //   } else {
-    //     toast.error("🫤Falha no sistema! Tente novamente.");
-    //   }
-    // } catch {
-    //   toast.error("🫤Falha no sistema! Tente novamente.");
-    // }
   };
 
   // Sugestão de melhoria sem useEffect e useState
