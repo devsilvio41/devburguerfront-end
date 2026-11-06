@@ -8,7 +8,7 @@ import {
 } from "@stripe/react-stripe-js";
 import "./styles.css";
 import { toast } from "react-toastify/unstyled";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // removido o "Navigate"
 
 export function CheckoutForm() {
   const { cartProducts, clearCart } = useCart();
@@ -37,9 +37,9 @@ export function CheckoutForm() {
       const { error, paymentIntent } = await stripe.confirmPayment({
         elements,
         redirect: "if_required",
-        // confirmParams: {
-        //   return_url: "http://localhost:5173/complete",
-        // },
+        confirmParams: {
+          return_url: "http://localhost:5173/complete",
+        },
       });
 
       if (error) {
@@ -64,12 +64,10 @@ export function CheckoutForm() {
 
           if (status === 200 || status === 201) {
             toast.success("Pedido realizado com sucesso!");
-            setTimeout(() => {
-              Navigate("/complete");
-              clearCart();
-            }, 2000);
-
             clearCart();
+            setTimeout(() => {
+              navigate("/complete"); // minúsculo: a função do useNavigate
+            }, 2000);
           } else if (status === 400) {
             toast.error("Falha ao realizar seu pedido.");
           } else {

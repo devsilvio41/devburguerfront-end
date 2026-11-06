@@ -49,7 +49,6 @@ export function CartResume() {
       });
       console.error("Erro ao criar o pagamento:", error);
     }
-
   };
 
   // Sugestão de melhoria sem useEffect e useState
