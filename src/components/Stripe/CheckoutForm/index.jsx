@@ -8,7 +8,7 @@ import {
 } from "@stripe/react-stripe-js";
 import "./styles.css";
 import { toast } from "react-toastify/unstyled";
-import { useNavigate } from "react-router-dom"; // removido o "Navigate"
+import { useLocation, useNavigate } from "react-router-dom"; // removido o "Navigate"
 
 export function CheckoutForm() {
   const { cartProducts, clearCart } = useCart();
@@ -44,6 +44,7 @@ export function CheckoutForm() {
 
       if (error) {
         setMessage(error.message);
+        toast.error(`Erro no pagamento: ${error.message}`);
       } else if (paymentIntent && paymentIntent.status === "succeeded") {
         try {
           const products = cartProducts.map((product) => {
@@ -66,8 +67,10 @@ export function CheckoutForm() {
             toast.success("Pedido realizado com sucesso!");
             clearCart();
             setTimeout(() => {
-              navigate("/complete"); // minúsculo: a função do useNavigate
-            }, 2000);
+              navigate(
+                `/complete?payment_intent_client_secret=${paymentIntent.client_secret}`,
+              ); // minúsculo: a função do useNavigate
+            }, 3000);
           } else if (status === 400) {
             toast.error("Falha ao realizar seu pedido.");
           } else {
