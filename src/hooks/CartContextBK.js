@@ -24,14 +24,6 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  //   useEffect(() => {
-  //     console.log(cartProducts);
-  //   }, [cartProducts]);
-
-  // function updateLocalStorage = (products)=>{
-  // localStorage.setItem("devburguer:cartInfo", JSON.stringify(products));
-  // }
-
   // Inicio limpa carrinho
   const clearCart = () => {};
   // Fim limpa carrinho

@@ -6,7 +6,7 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-import "../styles.css";
+import "../../Stripe/styles.css";
 import { toast } from "react-toastify/unstyled";
 import { useNavigate } from "react-router-dom"; // removido o "Navigate"
 
@@ -65,12 +65,12 @@ export function CheckoutForm() {
 
           if (status === 200 || status === 201) {
             toast.success("Pedido realizado com sucesso!");
-            clearCart();
             setTimeout(() => {
               navigate(
                 `/complete?payment_intent_client_secret=${paymentIntent.client_secret}`,
               ); // minúsculo: a função do useNavigate
             }, 3000);
+            clearCart();
           } else if (status === 400) {
             toast.error("Falha ao realizar seu pedido.");
           } else {
