@@ -6,9 +6,9 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-import "./styles.css";
+import "../styles.css";
 import { toast } from "react-toastify/unstyled";
-import { useLocation, useNavigate } from "react-router-dom"; // removido o "Navigate"
+import { useNavigate } from "react-router-dom"; // removido o "Navigate"
 
 export function CheckoutForm() {
   const { cartProducts, clearCart } = useCart();
@@ -80,7 +80,9 @@ export function CheckoutForm() {
           toast.error("🫤Falha no sistema! Tente novamente.");
         }
       } else {
-        toast.error("🫤Falha no sistema! Tente novamente.");
+        navigate(
+          `/complete?payment_intent_client_secret=${paymentIntent.client_secret}`,
+        );
       }
     } catch (error) {
       setMessage(error.message);
