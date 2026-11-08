@@ -14,7 +14,7 @@ export const ButtonGroup = styled.div`
   font-weight: 400;
 
   button {
-    background: #9758a6;
+    background: ${(props) => props.theme.purple};
     color: #fff;
     font-weight: 600;
     height: 30px;

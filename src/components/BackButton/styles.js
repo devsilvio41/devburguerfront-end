@@ -6,7 +6,7 @@ export const StyledButton = styled.button`
   bottom: 30%; /* ou top: 24px para ficar no topo */
   z-index: 100;
 
-  background: #9758a6;
+  background: ${(props) => props.theme.purple};
   color: #fff;
   border: none;
   padding: 12px 24px;

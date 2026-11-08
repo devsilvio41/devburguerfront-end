@@ -26,7 +26,7 @@ export const Container = styled.div`
 export const Title = styled.h2`
   font-size: 2rem;
   font-weight: 800;
-  color: #9758a6;
+  color: ${(props) => props.theme.green};
   padding-bottom: 0.8rem;
   position: relative;
   text-align: center;
@@ -37,7 +37,7 @@ export const Title = styled.h2`
     position: absolute;
     width: 3rem;
     height: 0.25rem;
-    background-color: #9758a6;
+    background-color: ${(props) => props.theme.green};
     bottom: 5px;
     left: calc(50% - 1.5rem);
   }
@@ -64,7 +64,7 @@ export const ContainerItems = styled.div`
     cursor: grab;
   }
 
-  color: #fff;
+  color: ${(props) => props.theme.white};
   font-size: 1.5rem;
   font-weight: bold;
 `;
@@ -79,13 +79,13 @@ export const CategoryButton = styled(Link)`
 
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 1.8rem;
-  color: #fff;
+  color: ${(props) => props.theme.purple};
   font-size: 1rem;
   font-weight: 500;
   text-decoration: none;
 
   &:hover {
-    background-color: #9758a6;
+    background-color: ${(props) => props.theme.purple};
     font-weight: 600;
   }
 `;

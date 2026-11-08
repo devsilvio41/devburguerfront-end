@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const Container = styled.div`
-  background-color: #1f1f1f;
+  background-color: ${(props) => props.theme.mainBlack};
   width: 100%;
   height: 4.5rem;
   padding: 0 56px;
@@ -39,15 +39,15 @@ export const Navigation = styled.nav`
 `;
 
 export const HeaderLink = styled(Link)`
-  color: ${(props) => (props.$isActive ? "#b351ae" : "#fff")};
+  color: ${(props) => (props.$isActive ? (props) => props.theme.purple : (props) => props.theme.white)};
   font-weight: ${(props) => (props.$isActive ? "700" : "400")};
-  border-bottom: ${(props) => (props.$isActive ? "1px solid #9758a6" : "none")};
+  border-bottom: ${(props) => (props.$isActive ? `1px solid ${(props) => props.theme.purple}` : "none")};
   text-decoration: none;
   padding-bottom: 2px;
   font-size: 1.1rem;
 
   &:hover {
-    color: #9758a6;
+    color: ${(props) => props.theme.purple};
   }
 `;
 
