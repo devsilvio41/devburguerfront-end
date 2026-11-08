@@ -5,11 +5,11 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   background-color: #5c2669;
-  height: 25px;
+  height: 30px;
 
   p {
     color: #fff;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: lighter;
 
     span {
