@@ -79,7 +79,7 @@ export const CategoryButton = styled(Link)`
 
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 1.8rem;
-  color: ${(props) => props.theme.purple};
+  color: ${(props) => props.theme.white};
   font-size: 1rem;
   font-weight: 500;
   text-decoration: none;
