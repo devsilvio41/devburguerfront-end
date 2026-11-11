@@ -1,14 +1,17 @@
 import { Route, Routes } from "react-router-dom";
 import {
   Cart,
-  Checkout,
   Home,
   Login,
   Register,
   Menu,
+  Checkout,
   CompletePayment,
-  Admin,
-} from "../containers/index.js";
+  Orders,
+  NewProduct,
+  EditProduct,
+  Products,
+} from "../containers";
 import { UserLayout } from "../layouts/UserLayout/index.jsx";
 import { AdminLayout } from "../layouts/AdminLayout/index.jsx";
 
@@ -25,7 +28,10 @@ export function Router() {
       {/* Rotas de admin */}
       <Route>
         <Route path="/admin" element={<AdminLayout />}>
-          <Route path="/admin/home" element={<Admin />} />
+          <Route path="pedidos" element={<Orders />} />
+          <Route path="novo-produto" element={<NewProduct />} />
+          <Route path="editar-produto" element={<EditProduct />} />
+          <Route path="produtos" element={<Products />} />
         </Route>
       </Route>
       {/* FIM rotas de admin */}
