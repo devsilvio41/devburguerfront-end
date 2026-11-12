@@ -3,15 +3,24 @@ import Gordao from "../../assets/gordao.png";
 import { SignInIcon } from "@phosphor-icons/react";
 import { Container, NavLink, NavLinkContainer, Footer } from "./styles";
 import { useUser } from "../../hooks/UserContext";
+import { useResolvedPath } from "react-router-dom";
 
 export function SideNavAdmin() {
   const { logout } = useUser();
+  const { pathname } = useResolvedPath();
+
+  console.log(pathname);
+
   return (
     <Container>
       <img src={Gordao} alt="Logo Restaurante Gordão e Pampam Lanches" />
       <NavLinkContainer>
         {navLinks.map((link) => (
-          <NavLink key={link.id} to={link.path}>
+          <NavLink
+            key={link.id}
+            to={link.path}
+            $isActive={pathname === link.path}
+          >
             {link.icon}
             <span>{link.label}</span>
           </NavLink>
