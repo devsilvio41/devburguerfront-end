@@ -5,41 +5,56 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { api } from "../../../services/api";
 
 import { Row } from "./row";
-
-function createData(name, calories, fat, carbs, protein, price) {
-  return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
-    price,
-    history: [
-      {
-        date: "2020-01-05",
-        customerId: "11091700",
-        amount: 3,
-      },
-      {
-        date: "2020-01-02",
-        customerId: "Anonymous",
-        amount: 1,
-      },
-    ],
-  };
-}
-
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0, 3.99),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3, 4.99),
-  createData("Eclair", 262, 16.0, 24, 6.0, 3.79),
-  createData("Cupcake", 305, 3.7, 67, 4.3, 2.5),
-  createData("Gingerbread", 356, 16.0, 49, 3.9, 1.5),
-];
+import { useEffect, useEffectEvent, useState } from "react";
 
 export function Orders() {
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    async function loadOrders() {
+      const { data } = await api.get("orders");
+
+      setOrders(data);
+      console.log("Ver conteudo de DATA", data);
+    }
+
+    loadOrders();
+  }, []);
+
+  function createData(order) {
+    return {
+      name: order.user.name,
+      orderID: order._id,
+      date: order.createdAT,
+      status: order.status,
+      quantity: order.quantity,
+      totalPrice: order.totalPrice,
+      history: [
+        {
+          date: "2020-01-05",
+          customerId: "11091700",
+          amount: 3,
+        },
+        {
+          date: "2020-01-02",
+          customerId: "Anonymous",
+          amount: 1,
+        },
+      ],
+    };
+  }
+
+  const rows = [
+    createData("Frozen yoghurt", 159, 6.0, 24, 4.0, 3.99),
+    createData("Ice cream sandwich", 237, 9.0, 37, 4.3, 4.99),
+    createData("Eclair", 262, 16.0, 24, 6.0, 3.79),
+    createData("Cupcake", 305, 3.7, 67, 4.3, 2.5),
+    createData("Gingerbread", 356, 16.0, 49, 3.9, 1.5),
+  ];
+
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
