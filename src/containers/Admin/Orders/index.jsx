@@ -8,17 +8,18 @@ import Paper from "@mui/material/Paper";
 import { api } from "../../../services/api";
 
 import { Row } from "./row";
-import { useEffect, useEffectEvent, useState } from "react";
+import { useEffect, useState } from "react";
 
 export function Orders() {
   const [orders, setOrders] = useState([]);
+  const [Rows, setRows] = useState([]);
 
   useEffect(() => {
     async function loadOrders() {
       const { data } = await api.get("orders");
 
       setOrders(data);
-      console.log("Ver conteudo de DATA", data);
+      console.log("Ver o que retorna dentro do DATA", data);
     }
 
     loadOrders();
@@ -26,34 +27,19 @@ export function Orders() {
 
   function createData(order) {
     return {
-      name: order.user.name,
+      name: order.user?.name,
       orderID: order._id,
-      date: order.createdAT,
+      date: order.createdAt,
+      products: order.products,
       status: order.status,
-      quantity: order.quantity,
-      totalPrice: order.totalPrice,
-      history: [
-        {
-          date: "2020-01-05",
-          customerId: "11091700",
-          amount: 3,
-        },
-        {
-          date: "2020-01-02",
-          customerId: "Anonymous",
-          amount: 1,
-        },
-      ],
     };
   }
 
-  const rows = [
-    createData("Frozen yoghurt", 159, 6.0, 24, 4.0, 3.99),
-    createData("Ice cream sandwich", 237, 9.0, 37, 4.3, 4.99),
-    createData("Eclair", 262, 16.0, 24, 6.0, 3.79),
-    createData("Cupcake", 305, 3.7, 67, 4.3, 2.5),
-    createData("Gingerbread", 356, 16.0, 49, 3.9, 1.5),
-  ];
+  useEffect(() => {
+    const newRows = orders.map((order) => createData(order));
+
+    setRows(newRows);
+  }, [orders]);
 
   return (
     <TableContainer component={Paper}>
@@ -61,16 +47,15 @@ export function Orders() {
         <TableHead>
           <TableRow>
             <TableCell />
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            <TableCell>Pedido</TableCell>
+            <TableCell>Cliente</TableCell>
+            <TableCell>Data do Pedido</TableCell>
+            <TableCell>Status</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <Row key={row.name} row={row} />
+            <Row key={row._id} row={row} />
           ))}
         </TableBody>
       </Table>
