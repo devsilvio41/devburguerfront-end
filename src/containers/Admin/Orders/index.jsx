@@ -6,12 +6,15 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { api } from "../../../services/api";
+import { Filter, FilterOption } from "./styles";
 
 import { Row } from "./row";
 import { useEffect, useState } from "react";
+import { orderStatusOptions } from "./orderStatus";
 
 export function Orders() {
-  const [orders, setOrders] = useState([]);
+  const [orders, setOrders] = useState([]); //BACKUP
+  const [filteredOrders, setFilteredOrders] = useState([]); // VALORES QUE ESTÂO NA TELA
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
@@ -19,7 +22,7 @@ export function Orders() {
       const { data } = await api.get("orders");
 
       setOrders(data);
-      console.log("Ver o que retorna dentro do DATA", data);
+      setFilteredOrders(data);
     }
 
     loadOrders();
@@ -35,34 +38,52 @@ export function Orders() {
   }
 
   useEffect(() => {
-    const newRows = orders.map((order) => createData(order));
+    const newRows = filteredOrders.map((order) => createData(order));
 
     setRows(newRows);
-  }, [orders]);
+  }, [filteredOrders]);
 
-  return (
-    <TableContainer component={Paper}>
-      <Table aria-label="collapsible table">
-        <TableHead>
-          <TableRow>
-            <TableCell />
-            <TableCell>Pedido</TableCell>
-            <TableCell>Cliente</TableCell>
-            <TableCell>Data do Pedido</TableCell>
-            <TableCell>Status</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <Row
-              key={row.orderId}
-              row={row}
-              orders={orders}
-              setOrders={setOrders}
-            />
+  function handleStatus(status) {
+    if (status.id === 0) {
+      setFilteredOrders(orders);
+    } else {
+      const newOrders = orders.filter((order) => order.status === status.value);
+      setFilteredOrders(newOrders);
+    }
+  }
+
+    return (
+      <>
+        <Filter>
+          {orderStatusOptions.map((status) => (
+            <FilterOption key={status.id} onClick={() => handleStatus(status)}>
+              {status.label}
+            </FilterOption>
           ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
-}
+        </Filter>
+        <TableContainer component={Paper}>
+          <Table aria-label="collapsible table">
+            <TableHead>
+              <TableRow>
+                <TableCell />
+                <TableCell>Pedido</TableCell>
+                <TableCell>Cliente</TableCell>
+                <TableCell>Data do Pedido</TableCell>
+                <TableCell>Status</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <Row
+                  key={row.orderId}
+                  row={row}
+                  orders={orders}
+                  setOrders={setOrders}
+                />
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </>
+    );
+  }
