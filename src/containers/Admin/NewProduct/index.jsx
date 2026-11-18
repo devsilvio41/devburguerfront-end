@@ -15,15 +15,34 @@ import {
   ErrorMessage,
 } from "./styles";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB em bytes
+const ACCEPTED_TYPES = ["image/jpeg", "image/png"];
 
 const schema = yup
   .object({
-    name: yup.string().required(),
-    price: yup.number().positive().required(),
-    category: yup.object().required(),
+    name: yup.string().required("Digite o Nome do Produto"),
+    price: yup
+      .number()
+      .positive()
+      .required("Digite o valor do produto")
+      .typeError("Digite o valor do produto"),
+    category: yup.object().required("Selecione uma categoria"),
+
     file: yup
       .mixed()
-      .test("file", "Escolha uma imagem", (value) => value?.length > 0),
+      .test("required", "Escolha um arquivo para continuar", (value) => {
+        return value?.length > 0;
+      })
+      .test("fileSize", "Carregue arquivos até 5MB", (value) => {
+        if (!value?.length) return true; // sem arquivo: o "required" cuida disso
+        return value[0].size <= MAX_FILE_SIZE;
+      })
+      .test("fileType", "Carregue apenas PNG ou JPEG", (value) => {
+        if (!value?.length) return true;
+        return ACCEPTED_TYPES.includes(value[0].type);
+      }),
   })
   .required();
 export function NewProduct() {
@@ -47,7 +66,21 @@ export function NewProduct() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (data) => {
+
+  const onSubmit = async (data) => {
+    const productFormData = new FormData();
+    productFormData.append("name", data.name);
+    productFormData.append("price", data.price);
+    productFormData.append("category_id", data.category.id);
+    productFormData.append("file", data.file[0]);
+
+    await toast.promise(api.post("/products", productFormData), {
+      pending: "Adicionando produto...",
+      success: "Produto criado com sucesso",
+      error: "Falha ao adicionar o produto, tente novamente",
+    });
+
+    // OBS: Colocar redirect para tela de produtos
     console.log(data);
   };
   return (
@@ -69,18 +102,9 @@ export function NewProduct() {
                 onChange: (e) => setFileName(e.target.files[0]?.name),
               })}
             />
-            {/* <input
-              type="file"
-              {...register("file")}
-              accept="image/png, image/jpeg"
-              onChange={(value) => {
-                setFileName(value?.target?.files[0]?.name);
-                register("file").onChange(value);
-              }}
-            /> */}
-            {fileName || "Imagem do Produto"}
-            <ErrorMessage>{errors?.file?.message}</ErrorMessage>
+            {fileName || "Upload do Produto"}
           </LabelUpload>
+          <ErrorMessage>{errors?.file?.message}</ErrorMessage>
         </InputGroup>
         <InputGroup>
           <Label>Categoria</Label>
@@ -89,7 +113,7 @@ export function NewProduct() {
           <Controller
             name="category"
             control={control}
-            render={(field) => (
+            render={({ field }) => (
               <Select
                 {...field}
                 options={categories}
@@ -100,6 +124,7 @@ export function NewProduct() {
               />
             )}
           />
+          <ErrorMessage>{errors?.category?.message}</ErrorMessage>
           {/* Input Não controlado */}
         </InputGroup>
         <SubmitButton>Adicionar produto</SubmitButton>
