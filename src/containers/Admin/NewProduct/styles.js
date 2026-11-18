@@ -50,15 +50,14 @@ export const LabelUpload = styled.label`
   margin-top: 20px 0;
 
   > svg {
-    width: 20px;
-    height: 20px;
+    width: 32px;
+    height: 32px;
     fill: ${(props) => props.theme.white};
     margin-right: 4px;
   }
 
   input {
     display: none;
-    
   }
 `;
 
@@ -69,4 +68,11 @@ export const SubmitButton = styled(Button)`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const ErrorMessage = styled.span`
+  font-size: 1rem;
+  line-height: 80%;
+  font-weight: 500;
+  color: ${(props) => props.theme.darkRed};
 `;
