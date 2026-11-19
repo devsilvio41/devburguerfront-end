@@ -7,20 +7,43 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
 import { useEffect, useState } from "react";
-import { Container, Title } from "./styles";
+import { Container, EditButton, ProductImage } from "./styles";
 import { api } from "../../../services/api";
 import { formatPrice } from "../../../utils/formatPrice";
-export function Products() {
-  useEffect(() => {
-    const [products, setProducts] = useState([]);
-    async function loadProducts() {
-      const { data } = await api.get("/products");
+import { PencilIcon } from "@phosphor-icons/react";
+import { CheckCircleIcon, XCircleIcon } from "@phosphor-icons/react/dist/ssr";
+import { useNavigate } from "react-router-dom";
 
-      setProducts(data);
+export function Products() {
+  const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    async function loadProducts() {
+      try {
+        const {
+          data: { products },
+        } = await api.get("/products");
+        setProducts(products);
+      } catch (error) {
+        console.error("Erro ao carregar produtos:", error);
+      }
     }
 
     loadProducts();
   }, []);
+
+  function isOffer(offer) {
+    if (offer) {
+      return <CheckCircleIcon color="#61a120" size={32} />;
+    } else {
+      return <XCircleIcon color="#ff3205" size={32} />;
+    }
+  }
+
+  function editProduct(product) {
+    navigate("/admin/editar-produto", { state: { product } });
+  }
 
   return (
     <Container>
@@ -28,26 +51,36 @@ export function Products() {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Dessert (100g serving)</TableCell>
-              <TableCell align="right">Calories</TableCell>
-              <TableCell align="right">Fat&nbsp;(g)</TableCell>
-              <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-              <TableCell align="right">Protein&nbsp;(g)</TableCell>
+              <TableCell>Nome</TableCell>
+              <TableCell align="center">Preço</TableCell>
+              <TableCell align="center">Produto em oferta</TableCell>
+              <TableCell align="center"></TableCell>
+              <TableCell align="center">Editar produto</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {products?.map((product) => (
               <TableRow
-                key={row.name}
+                key={product.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {row.name}
+                  {product.name}
                 </TableCell>
-                <TableCell align="right">{row.calories}</TableCell>
-                <TableCell align="right">{row.fat}</TableCell>
-                <TableCell align="right">{row.carbs}</TableCell>
-                <TableCell align="right">{row.protein}</TableCell>
+                <TableCell align="center">
+                  <TableCell align="center">
+                    {formatPrice(product.price)}
+                  </TableCell>
+                </TableCell>
+                <TableCell align="center">{isOffer(product.offer)}</TableCell>
+                <TableCell align="center">
+                  <ProductImage src={product.url} />
+                </TableCell>
+                <TableCell align="center">
+                  <EditButton onClick={() => editProduct(product)}>
+                    <PencilIcon />
+                  </EditButton>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
