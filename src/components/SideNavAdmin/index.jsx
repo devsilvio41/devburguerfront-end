@@ -1,5 +1,5 @@
 import { navLinks } from "./navLinks";
-import Gordao from "../../assets/gordao.png";
+import Logo from "../../assets/logo.svg";
 import { SignInIcon } from "@phosphor-icons/react";
 import { Container, NavLink, NavLinkContainer, Footer } from "./styles";
 import { useUser } from "../../hooks/UserContext";
@@ -13,7 +13,7 @@ export function SideNavAdmin() {
 
   return (
     <Container>
-      <img src={Gordao} alt="Logo Restaurante Gordão e Pampam Lanches" />
+      <img src={Logo} alt="Logo Restaurante Gordão e Pampam Lanches" />
       <NavLinkContainer>
         {navLinks.map((link) => (
           <NavLink

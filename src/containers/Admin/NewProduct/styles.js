@@ -76,3 +76,17 @@ export const ErrorMessage = styled.span`
   font-weight: 500;
   color: ${(props) => props.theme.darkRed};
 `;
+
+export const ContainerCheckbox = styled.div`
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+`;
+
+export const CheckLabel = styled.span`
+  color: ${(props) => props.theme.white};
+  font-size: 0.8rem;
+  font-weight: 400;
+  margin-left: 20px;
+`;
