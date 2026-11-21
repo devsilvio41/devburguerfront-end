@@ -5,7 +5,7 @@ RUN corepack enable
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 
-COPY . .
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 ARG VITE_BASE_URL
 ARG VITE_STRIPE_PUBLISHABLE_KEY

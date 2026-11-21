@@ -1,2 +1,4 @@
 minimumReleaseAgeExclude:
   - prettier@3.9.9
+
+pnpm approve-builds
