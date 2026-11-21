@@ -1,14 +1,20 @@
-CMD ["nginx", "-g", "daemon off;"]
-
+# Etapa 1: build
 FROM node:20-alpine AS build
 WORKDIR /app
-COPY package.json yarn.lock ./
-RUN npm install --frozen-lockfile
-COPY . .
-ARG VITE_API_URL
-ENV VITE_API_URL=$VITE_API_URL
-RUN yarn build
 
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+ARG VITE_BASE_URL
+ARG VITE_STRIPE_PUBLISHABLE_KEY
+ENV VITE_BASE_URL=$VITE_BASE_URL
+ENV VITE_STRIPE_PUBLISHABLE_KEY=$VITE_STRIPE_PUBLISHABLE_KEY
+
+RUN npm run build
+
+# Etapa 2: servidor
 FROM nginx:alpine
 COPY --from=build /app/dist /usr/share/nginx/html
-EXPOSE 5173
+EXPOSE 80
