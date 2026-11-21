@@ -1,26 +1,19 @@
-# Etapa 1: build
 FROM node:20-alpine AS build
-
 WORKDIR /app
 
-# Instala dependências
-COPY package*.json ./
-RUN npm install
+RUN corepack enable
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
 
-# Copia o restante do projeto
 COPY . .
 
-# Build da aplicação
-RUN npm run build
+ARG VITE_BASE_URL
+ARG VITE_STRIPE_PUBLISHABLE_KEY
+ENV VITE_BASE_URL=$VITE_BASE_URL
+ENV VITE_STRIPE_PUBLISHABLE_KEY=$VITE_STRIPE_PUBLISHABLE_KEY
 
-# Etapa 2: servidor
+RUN pnpm build
+
 FROM nginx:alpine
-
 COPY --from=build /app/dist /usr/share/nginx/html
-
-# Expor a porta que Easypanel vai usar
-
-EXPOSE 3001
-
-
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 80
