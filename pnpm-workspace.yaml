@@ -1,4 +1,6 @@
 minimumReleaseAgeExclude:
   - prettier@3.9.9
 
-pnpm approve-builds
+
+allowBuilds:
+  core-js: false
