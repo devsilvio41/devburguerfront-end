@@ -69,16 +69,13 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem("devburguer:cartInfo", JSON.stringify(products));
   }
 
-  useEffect(() => {
-    console.log(cartProducts);
-  }, [cartProducts]);
+  useEffect(() => {}, [cartProducts]);
 
   return (
     <CartContext.Provider
       value={{
         cartProducts,
         putProductInCart,
-        deleteProduct,
         clearCart,
         increaseProduct,
         decreaseProduct,

@@ -41,7 +41,6 @@ export function EditProduct() {
   const {
     state: { product },
   } = useLocation();
-  console.log("Conteúdo em DATA", product);
 
   useEffect(() => {
     async function loadCategories() {

@@ -33,7 +33,6 @@ export function CartResume() {
 
     try {
       const { data } = await api.post("create-payment-intent", { products });
-      console.log("resposta do back:", data);
       navigate("/checkout", { state: data });
     } catch (error) {
       toast.error("Erro, tente novamente!", {
@@ -50,15 +49,6 @@ export function CartResume() {
       console.error("Erro ao criar o pagamento:", error);
     }
   };
-
-  // Sugestão de melhoria sem useEffect e useState
-  //   const { cartProducts, clearCart } = useCart();
-  // const [deliveryTax] = useState(600);
-
-  // const finalPrice = cartProducts.reduce((acc, current) => {
-  //   return current.price * current.quantity + acc;
-  // }, 0);
-  // Fim Sugestão de melhoria sem useEffect e useState
 
   return (
     <div>

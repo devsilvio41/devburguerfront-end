@@ -42,7 +42,7 @@ export function Register() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  console.log(errors);
+
   const onSubmit = async (data) => {
     const response = await toast.promise(
       api.post("/users", {
@@ -56,7 +56,6 @@ export function Register() {
         error: "Ops, algo deu errado! Confira seus dados e tente novamente.🤯",
       },
     );
-    console.log(response);
   };
   // Fim Function
   function handlePaste(e) {
